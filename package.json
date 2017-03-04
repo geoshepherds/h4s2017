@@ -1,0 +1,11 @@
+{
+  "name": "h4s2017",
+  "version": "0.0.1",
+  "description": "Contribution for Hack for Sweden 2017 in Stockholm, Sweden. The project visualizes shadows cast by buildings in Stockholm City throughout a given day.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Owain Stratton and Angelica Hart Lindh",
+  "license": "MIT"
+}

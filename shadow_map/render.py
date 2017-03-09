@@ -41,7 +41,7 @@ def shadow_accumulation(shadow_map):
         for x in xrange(0, hm.size):
             acc_map[(y, x)] = acc_map[(y, x)] + shadow_map[(y, x)]
 
-    return shadowmap
+    return acc_map
 
 t = t1
 while t <= t2:
@@ -56,8 +56,6 @@ while t <= t2:
     array_map = sm.compute_shadow()
     shadow_total = shadow_accumulation(array_map)
 
-
-    pdb.set_trace()
 
     # img = sm.to_image()
     # img = img.convert('RGB')

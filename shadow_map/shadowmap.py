@@ -22,7 +22,7 @@ class ShadowMap(Map):
         self.max_height = numpy.amax(self.heightmap.heights)
         self.min_height = numpy.amin(self.heightmap.heights)
 
-    def render(self):
+    def compute_shadow(self):
         shadowmap = numpy.zeros((self.size, self.size), dtype=int)
         for y in xrange(0, self.size):
             for x in xrange(0, self.size):
@@ -31,10 +31,10 @@ class ShadowMap(Map):
         return shadowmap
 
     def to_image(self):
-        data = self.render()
+        data = self.shadow_accumulation
 
         pdb.set_trace()
-        
+
         rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
         return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
 

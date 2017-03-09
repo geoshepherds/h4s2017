@@ -26,21 +26,6 @@ class OSMHeightMap(HeightMap):
         draw = ImageDraw.Draw(img)
         fc = json.load(f)
 
-        # for f in fc['features']:
-        #     height = float(f['properties']['Z']) if f['properties'].has_key('Z') else 10
-        #
-        #     # pdb.set_trace()
-        #
-        #     coords = f['geometry']['coordinates'][0]
-        #
-        #     for coord in coords:
-        #
-        #         # pdb.set_trace()
-        #
-        #         geom = map(lambda ll: self._latLngToIndex(ll[1], ll[0]), coord)
-        #
-        #     draw.polygon(geom, fill=height)
-
         for f in fc['features']:
 
             zindex = float(f['properties']['Z']) if f['properties'].has_key('Z') else 0

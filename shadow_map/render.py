@@ -33,6 +33,16 @@ if args.background_map:
     bkg = Image.open(args.background_map).convert('RGB')
     transparency = int(255 - args.opacity * 255)
 
+
+acc_map = numpy.zeros((hm.size, hm.size), dtype=int)
+
+def shadow_accumulation(shadow_map):
+    for y in xrange(0, hm.size):
+        for x in xrange(0, hm.size):
+            acc_map[(y, x)] = acc_map[(y, x)] + shadow_map[(y, x)]
+
+    return shadowmap
+
 t = t1
 while t <= t2:
     print t.strftime('%Y-%m-%d_%H%M.png'), '...'
@@ -43,22 +53,39 @@ while t <= t2:
     sun_z = sin(sunpos['altitude'])
 
     sm = ShadowMap(hm.lat, hm.lng, hm.resolution, hm.size, hm.proj, sun_x, sun_y, sun_z, hm, 1.5)
+    array_map = sm.compute_shadow()
+    shadow_total = shadow_accumulation(array_map)
 
-    # pdb.set_trace()
 
-    img = sm.to_image()
-    img = img.convert('RGB')
+    pdb.set_trace()
 
-    if bkg:
-        img = Image.eval(img, lambda x: x + transparency)
-        img = ImageChops.multiply(img, bkg)
-
-    draw = ImageDraw.ImageDraw(img)
-    text = t.strftime('%Y-%m-%d %H:%M')
-    txtsize = draw.textsize(text)
-    draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
-
-    img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d_%H%M.png')))
+    # img = sm.to_image()
+    # img = img.convert('RGB')
+    #
+    # if bkg:
+    #     img = Image.eval(img, lambda x: x + transparency)
+    #     img = ImageChops.multiply(img, bkg)
+    #
+    # draw = ImageDraw.ImageDraw(img)
+    # text = t.strftime('%Y-%m-%d %H:%M')
+    # txtsize = draw.textsize(text)
+    # draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
+    #
+    # img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d_%H%M.png')))
 
     t += delta
     print
+
+img = sm.to_image()
+img = img.convert('RGB')
+
+if bkg:
+    img = Image.eval(img, lambda x: x + transparency)
+    img = ImageChops.multiply(img, bkg)
+
+draw = ImageDraw.ImageDraw(img)
+text = t.strftime('%Y-%m-%d %H:%M')
+txtsize = draw.textsize(text)
+draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
+
+img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d_%H%M.png')))

@@ -31,9 +31,10 @@ class ShadowMap(Map):
         return shadowmap
 
     def to_image(self):
+        pdb.set_trace()
+
         data = self.shadow_accumulation
 
-        pdb.set_trace()
 
         rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
         return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)

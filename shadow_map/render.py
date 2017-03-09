@@ -6,6 +6,7 @@ from suncalc import solar_position
 from shadowmap import ShadowMap, get_projection_north_deviation
 from math import sin, cos
 from os import path
+import numpy
 from PIL import Image, ImageChops, ImageDraw
 import argparse
 import pdb
@@ -41,7 +42,7 @@ def shadow_accumulation(shadow_map):
         for x in xrange(0, hm.size):
             acc_map[(y, x)] = acc_map[(y, x)] + shadow_map[(y, x)]
 
-    return shadowmap
+    return acc_map
 
 t = t1
 while t <= t2:

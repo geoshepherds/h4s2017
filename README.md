@@ -27,3 +27,16 @@ Then install the requirements with pip:
 ```sh
 pip install -r /shadow_map/requirements.txt
 ```
+
+## Generating HeightMap
+
+
+```sh
+python path/to/heightmap.py --projection epsg:3011 --geojson path/to/<buildings>.geojson --elevation-dir path/to/dir --output path/to/<name>.heightmap --save-image path/to/<name>.png 59.34413 18.09595 2 4272
+```
+
+## Generating ShadowMap
+
+```sh
+python shadow_map/render.py path/to/<name>.heightmap "2014-06-25 12:00" "2014-06-25 13:00" 60 path/to/dir
+```

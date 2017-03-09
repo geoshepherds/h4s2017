@@ -4,6 +4,7 @@ from PIL import Image
 import numpy
 from math import sqrt, atan2
 from sys import stdout
+import pdb
 
 def update_progress(progress):
     progress = int(progress * 100)
@@ -31,6 +32,9 @@ class ShadowMap(Map):
 
     def to_image(self):
         data = self.render()
+
+        pdb.set_trace()
+        
         rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
         return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
 

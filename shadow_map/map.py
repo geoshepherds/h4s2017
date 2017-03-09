@@ -4,13 +4,14 @@ import pdb
 
 class Map(object):
     def __init__(self, lat, lng, resolution, size, proj):
-        self.lat = lat
-        self.lng = lng
+        self.lat = lat # Center latitude
+        self.lng = lng # Center longitude
         self.resolution = resolution
         self.size = size
         self.psize = size * resolution
+        # performs cartographic transformations (converts from longitude,latitude to native map projection x,y coordinates and vice versa)
         self.proj = proj
-        cx, cy = proj(lng, lat)
+        cx, cy = proj(lng, lat, errcheck=True)
 
         self.bounds = (
             cx - self.psize / 2,
@@ -26,12 +27,15 @@ class Map(object):
 
     def _latLngToIndex(self, lat, lng):
 
-        pdb.set_trace()
-        
-        x, y = self.proj(lng, lat)
-        return (
-            (x - self.bounds[0]) / self.psize * self.size,
-            (y - self.bounds[1]) / self.psize * self.size)
+        # x, y = self.proj(lng, lat,)
+
+        feature_bounds = (
+            (lng - self.bounds[0]) / self.psize * self.size,
+            (lat - self.bounds[1]) / self.psize * self.size
+        )
+
+        # pdb.set_trace()
+        return feature_bounds
 
     def save(self, f):
         pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)

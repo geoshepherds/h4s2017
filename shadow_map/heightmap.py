@@ -26,20 +26,32 @@ class OSMHeightMap(HeightMap):
         draw = ImageDraw.Draw(img)
         fc = json.load(f)
 
+        # for f in fc['features']:
+        #     height = float(f['properties']['Z']) if f['properties'].has_key('Z') else 10
+        #
+        #     # pdb.set_trace()
+        #
+        #     coords = f['geometry']['coordinates'][0]
+        #
+        #     for coord in coords:
+        #
+        #         # pdb.set_trace()
+        #
+        #         geom = map(lambda ll: self._latLngToIndex(ll[1], ll[0]), coord)
+        #
+        #     draw.polygon(geom, fill=height)
+
         for f in fc['features']:
-            height = float(f['properties']['Z']) if f['properties'].has_key('Z') else 10
 
-            pdb.set_trace()
+            zindex = float(f['properties']['Z']) if f['properties'].has_key('Z') else 0
 
-            coords = f['geometry']['coordinates'][0]
+            coords = map(lambda ll: self._latLngToIndex(ll[1], ll[0]), f['geometry']['coordinates'][0])
 
-            for coord in coords:
+            draw.polygon(coords, fill = zindex)
 
-                pdb.set_trace()
+            # pdb.set_trace()
 
-                geom = map(lambda ll: self._latLngToIndex(ll[1], ll[0]), coord)
-
-            draw.polygon(geom, fill=height)
+        # pdb.set_trace()
 
         self.heights = numpy.array(img)
 
@@ -100,7 +112,7 @@ if __name__ == '__main__':
     resolution = float(args.resolution)
     size = int(args.size)
 
-    proj = Proj(proj=args.projection)
+    proj = Proj(init=args.projection)
 
     elev = SrtmHeightMap(lat, lng, resolution, size, proj, args.elevation_dir)
 
@@ -109,6 +121,8 @@ if __name__ == '__main__':
 
     hm = HeightMap(lat, lng, resolution, size, proj)
     hm.heights = elev.heights + buildings.heights
+
+    # pdb.set_trace()
 
     if args.save_image:
         hm.to_image().save(args.save_image)

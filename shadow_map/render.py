@@ -6,6 +6,7 @@ from suncalc import solar_position
 from shadowmap import ShadowMap, get_projection_north_deviation
 from math import sin, cos
 from os import path
+import numpy
 from PIL import Image, ImageChops, ImageDraw
 import argparse
 import pdb

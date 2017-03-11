@@ -46,7 +46,7 @@ def shadow_accumulation(shadow_map):
 
 t = t1
 while t <= t2:
-    print t.strftime('%Y-%m-%d_%H%M.png'), '...'
+    print t.strftime('%Y-%m-%d_%H%M'), '...'
     sunpos = solar_position(t, hm.lat, hm.lng)
     dev = get_projection_north_deviation(hm.proj, hm.lat, hm.lng)
     sun_x = -sin(sunpos['azimuth'] - dev) * cos(sunpos['altitude'])
@@ -58,7 +58,7 @@ while t <= t2:
     shadow_total = shadow_accumulation(array_map)
 
 
-    pdb.set_trace()
+    # pdb.set_trace()
 
     # img = sm.to_image()
     # img = img.convert('RGB')
@@ -77,16 +77,12 @@ while t <= t2:
     t += delta
     print
 
-img = sm.to_image()
-img = img.convert('RGB')
-
-if bkg:
-    img = Image.eval(img, lambda x: x + transparency)
-    img = ImageChops.multiply(img, bkg)
+img = Image.fromarray(shadow_total).transpose(Image.FLIP_TOP_BOTTOM)
+img = img.convert()
 
 draw = ImageDraw.ImageDraw(img)
-text = t.strftime('%Y-%m-%d %H:%M')
+text = t.strftime('%Y-%m-%d')
 txtsize = draw.textsize(text)
 draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
 
-img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d_%H%M.png')))
+img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d.png')))

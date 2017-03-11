@@ -47,7 +47,8 @@ class SrtmHeightMap(HeightMap):
         HeightMap.__init__(self, lat, lng, resolution, size, proj)
 
         tiles = {}
-
+        pdb.set_trace()
+        
         for y in xrange(0, size):
             cy = self.bounds[1] + y / float(size) * self.psize
             for x in xrange(0, size):

@@ -30,14 +30,10 @@ class ShadowMap(Map):
 
         return shadowmap
 
-    def to_image(self):
-        pdb.set_trace()
+    # def to_image(data):
 
-        data = self.shadow_accumulation
-
-
-        rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
-        return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
+        # rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
+        # return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
 
     def is_lit(self, x0, y0):
         x1 = x0 + self.sun_x * self.size

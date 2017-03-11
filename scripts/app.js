@@ -3,7 +3,7 @@ var L = require('leaflet');
 L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
 var mapCenter = [59.3308, 18.0673];
-var startZoom = 10;
+var startZoom = 12;
 
 var map = new L.Map('map').setView(mapCenter, startZoom);
 

@@ -19,7 +19,7 @@ class Map(object):
             cx + self.psize / 2,
             cy + self.psize / 2,
         )
-
+        # pdb.set_trace()
         w, s = proj(self.bounds[0], self.bounds[1], inverse=True)
         e, n = proj(self.bounds[2], self.bounds[3], inverse=True)
 

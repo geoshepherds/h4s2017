@@ -7,9 +7,12 @@ from shadowmap import ShadowMap, get_projection_north_deviation
 from math import sin, cos
 from os import path
 import numpy
-from PIL import Image, ImageChops, ImageDraw
+# from pyproj import Proj
+import csv
+from PIL import Image, ImageOps, ImageDraw, ImageFilter
 import argparse
 import pdb
+import decimal
 
 parser = argparse.ArgumentParser()
 parser.add_argument('heightmap', type=str, help='Path to heightmap file')
@@ -25,8 +28,10 @@ args = parser.parse_args()
 with open(args.heightmap, 'rb') as f:
     hm = HeightMap.load(f)
 
+
 t1 = datetime.strptime(args.start, '%Y-%m-%d %H:%M')
 t2 = datetime.strptime(args.end, '%Y-%m-%d %H:%M')
+
 delta = timedelta(minutes=args.interval)
 
 bkg = None
@@ -44,6 +49,7 @@ def shadow_accumulation(shadow_map):
 
     return acc_map
 
+
 t = t1
 while t <= t2:
     print t.strftime('%Y-%m-%d_%H%M'), '...'
@@ -57,32 +63,21 @@ while t <= t2:
     array_map = sm.compute_shadow()
     shadow_total = shadow_accumulation(array_map)
 
-
-    # pdb.set_trace()
-
-    # img = sm.to_image()
-    # img = img.convert('RGB')
-    #
-    # if bkg:
-    #     img = Image.eval(img, lambda x: x + transparency)
-    #     img = ImageChops.multiply(img, bkg)
-    #
-    # draw = ImageDraw.ImageDraw(img)
-    # text = t.strftime('%Y-%m-%d %H:%M')
-    # txtsize = draw.textsize(text)
-    # draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
-    #
-    # img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d_%H%M.png')))
-
     t += delta
     print
 
-img = Image.fromarray(shadow_total).transpose(Image.FLIP_TOP_BOTTOM)
-img = img.convert()
+img = Image.new("RGBA", (hm.size, hm.size))
+alpha_scaled = (200.0 / acc_map.max() * (acc_map - acc_map.min())).astype(numpy.uint8)
 
-draw = ImageDraw.ImageDraw(img)
-text = t.strftime('%Y-%m-%d')
-txtsize = draw.textsize(text)
-draw.text((hm.size - txtsize[0] - 5, hm.size - txtsize[1] - 5), text, (0,0,0))
+for y in xrange(0, hm.size):
+    for x in xrange(0, hm.size):
+        img.putpixel((y, x), (0,82,147, alpha_scaled[(y,x)]))
 
-img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d.png')))
+blurfilter = ImageFilter.GaussianBlur()
+blurfilter.radius=3
+blurred_img = img.filter(blurfilter)
+rotated_img = blurred_img.rotate(90)
+# rotated_img = blurred_img.transpose(Image.FLIP_TOP_BOTTOM)
+draw = ImageDraw.ImageDraw(rotated_img)
+
+rotated_img.save(path.join(args.output_directory, t.strftime('%Y-%m-%d.png')))

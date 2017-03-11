@@ -2,7 +2,7 @@
 
 """Solar position calculations, adapted from Suncalc, a JS lib
 by Vladimir Agafonkin (https://github.com/mourner/suncalc)"""
-
+import pdb
 from math import sin, cos, tan, asin, atan2, pi
 from datetime import datetime
 
@@ -64,7 +64,7 @@ def solar_position(date, lat, lng):
 
     c  = sunCoords(d)
     H  = siderealTime(d, lw) - c['ra']
-
+    
     return {
         'azimuth': azimuth(H, phi, c['dec']),
         'altitude': altitude(H, phi, c['dec'])

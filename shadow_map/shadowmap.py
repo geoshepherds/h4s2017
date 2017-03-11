@@ -26,14 +26,14 @@ class ShadowMap(Map):
         shadowmap = numpy.zeros((self.size, self.size), dtype=int)
         for y in xrange(0, self.size):
             for x in xrange(0, self.size):
-                shadowmap[(y, x)] = 1 if self.is_lit(x, y) else 0
+                shadowmap[(y, x)] = 0 if self.is_lit(x, y) else 1
 
         return shadowmap
 
-    # def to_image(data):
-
-        # rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
-        # return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
+    def to_image(data):
+        # data = self.shadow_accumulation
+        rescaled = (255.0 / data.max() * (data - data.min())).astype(numpy.uint8)
+        return Image.fromarray(rescaled).transpose(Image.FLIP_TOP_BOTTOM)
 
     def is_lit(self, x0, y0):
         x1 = x0 + self.sun_x * self.size

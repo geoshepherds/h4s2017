@@ -2,4 +2,6 @@ node_modules/
 .DS_Store
 venv/
 shadow_map/data/
+shadow_map/rendered/
+resources/
 *.pyc

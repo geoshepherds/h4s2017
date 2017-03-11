@@ -34,10 +34,6 @@ class OSMHeightMap(HeightMap):
 
             draw.polygon(coords, fill = zindex)
 
-            # pdb.set_trace()
-
-        # pdb.set_trace()
-
         self.heights = numpy.array(img)
 
 
@@ -107,7 +103,7 @@ if __name__ == '__main__':
     hm = HeightMap(lat, lng, resolution, size, proj)
     hm.heights = elev.heights + buildings.heights
 
-    # pdb.set_trace()
+
 
     if args.save_image:
         hm.to_image().save(args.save_image)

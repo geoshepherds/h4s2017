@@ -4,15 +4,17 @@ from PIL import Image, ImageColor, ImageDraw
 import pdb
 from os import path
 
-im = Image.open("shadow_map/rendered/2016-06-21.png")
+im = Image.open("shadow_map/rendered/sthlm_buildings.png")
 newIm = im.copy()
+rgbImg = newIm.convert("RGB")
 
 for y in xrange(0, newIm.size[0]):
-    for x in xrange(0, newIm.size[0]):
-        rgba = newIm.getpixel((y, x))
-        newIm.putpixel((y, x), (0,97,1, rgba[3]))
+    for x in xrange(0, newIm.size[1]):
+        # rgba = rgbImg.getpixel((y,x))
+        # pdb.set_trace()
+        rgbImg.putpixel((y, x), (255,0,255))
 
 
-draw = ImageDraw.ImageDraw(newIm)
+draw = ImageDraw.ImageDraw(rgbImg)
 
-newIm.save('shadow_map/rendered/2016-06-21-green.png')
+rgbImg.save('shadow_map/rendered/sthlm_buildingsRgb.png')

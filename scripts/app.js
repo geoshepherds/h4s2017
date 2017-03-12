@@ -7,8 +7,6 @@ L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
 (function() {
 
-   var self = this;
-
    // map settings
    var mapCenter = [59.3308, 18.0673];
    var startZoom = 12;
@@ -75,7 +73,7 @@ L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
       }
    }
 
-   
+
    init();
 
 })();

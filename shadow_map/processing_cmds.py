@@ -24,6 +24,8 @@ gdalwarp -of GTiff -t_srs EPSG:3857 2016-12-21_winter.tif 2016-12-21_winter_epsg
 
 gdal2tiles.py 2016-12-21_winter_epsg3857.tif
 
+gdal_rasterize -burn 255 -l sthlm /Users/angelicahartlindh/h4s2017/resources/sthlm.geojson /Users/angelicahartlindh/h4s2017/resources/sthlm2.map
+
 
 
 

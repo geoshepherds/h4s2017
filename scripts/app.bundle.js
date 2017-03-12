@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10435,16 +10435,15 @@ return jQuery;
 
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xhr = __webpack_require__(5),
-    csv2geojson = __webpack_require__(6),
-    wellknown = __webpack_require__(14),
-    polyline = __webpack_require__(10),
-    topojson = __webpack_require__(13),
-    toGeoJSON = __webpack_require__(12);
+var xhr = __webpack_require__(4),
+    csv2geojson = __webpack_require__(5),
+    wellknown = __webpack_require__(13),
+    polyline = __webpack_require__(9),
+    topojson = __webpack_require__(12),
+    toGeoJSON = __webpack_require__(11);
 
 module.exports.polyline = polylineLoad;
 module.exports.polyline.parse = polylineParse;
@@ -10700,7 +10699,7 @@ function parseXML(str) {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -23960,7 +23959,7 @@ L.control.layers = function (baseLayers, overlays, options) {
 //# sourceMappingURL=leaflet-src.map
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function corslite(url, callback, cors) {
@@ -24059,14 +24058,14 @@ if (true) module.exports = corslite;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var dsv = __webpack_require__(7),
-    sexagesimal = __webpack_require__(11);
+var dsv = __webpack_require__(6),
+    sexagesimal = __webpack_require__(10);
 
 var latRegex = /(Lat)(itude)?/gi,
     lonRegex = /(L)(on|ng)(gitude)?/i;
@@ -24314,19 +24313,19 @@ module.exports = {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_dsv__ = __webpack_require__(0);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "dsvFormat", function() { return __WEBPACK_IMPORTED_MODULE_0__src_dsv__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_csv__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_csv__ = __webpack_require__(7);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "csvParse", function() { return __WEBPACK_IMPORTED_MODULE_1__src_csv__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "csvParseRows", function() { return __WEBPACK_IMPORTED_MODULE_1__src_csv__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "csvFormat", function() { return __WEBPACK_IMPORTED_MODULE_1__src_csv__["c"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "csvFormatRows", function() { return __WEBPACK_IMPORTED_MODULE_1__src_csv__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_tsv__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_tsv__ = __webpack_require__(8);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "tsvParse", function() { return __WEBPACK_IMPORTED_MODULE_2__src_tsv__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "tsvParseRows", function() { return __WEBPACK_IMPORTED_MODULE_2__src_tsv__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "tsvFormat", function() { return __WEBPACK_IMPORTED_MODULE_2__src_tsv__["c"]; });
@@ -24337,7 +24336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24357,7 +24356,7 @@ var csvFormatRows = csv.formatRows;
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24377,7 +24376,7 @@ var tsvFormatRows = tsv.formatRows;
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24537,7 +24536,7 @@ if (typeof module === 'object' && module.exports) {
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = element;
@@ -24623,7 +24622,7 @@ function swapdim(a, b, dim) {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var toGeoJSON = (function() {
@@ -24707,7 +24706,7 @@ function swapdim(a, b, dim) {
         serializer = new XMLSerializer();
     // only require xmldom in a node environment
     } else if (typeof exports === 'object' && typeof process === 'object' && !process.browser) {
-        serializer = new (__webpack_require__(16).XMLSerializer)();
+        serializer = new (__webpack_require__(15).XMLSerializer)();
     }
     function xml2str(str) {
         // IE9 will create a new XMLSerializer but it'll crash immediately.
@@ -24989,10 +24988,10 @@ function swapdim(a, b, dim) {
 
 if (true) module.exports = toGeoJSON;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -25542,7 +25541,7 @@ if (true) module.exports = toGeoJSON;
 }));
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 /*eslint-disable no-cond-assign */
@@ -25818,7 +25817,7 @@ function stringify (gj) {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -26004,25 +26003,23 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var L = __webpack_require__(4);
+var L = __webpack_require__(3);
 var $ = __webpack_require__(1);
-var omni = __webpack_require__(3);
+var omni = __webpack_require__(2);
 
 L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
 
 (function() {
-
-   var self = this;
 
    // map settings
    var mapCenter = [59.3308, 18.0673];
@@ -26091,42 +26088,6 @@ L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
    }
 
 
-
-
-   // var baseTileLayer = new L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-   // 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-   // 	subdomains: 'abcd',
-   // 	ext: 'png'
-   // }).addTo(map);
-
-   // var summerTileLayer = new L.tileLayer('http://localhost:3000/{z}/{x}/{y}.{ext}', {
-   //    minZoom: 11,
-   //    maxZoom: 15,
-   //    ext: 'png',
-   //    tms: true,
-   // }).addTo(map);
-
-   // var buildings = omni.csv('/buildings');
-   // $.get('./resources/sthlm.csv', function(csvContents) {
-   //    // console.log('loading csv...', csvContents);
-   //     var geoLayer = L.geoCsv(csvContents, {firstLineTitles: true, fieldSeparator: ','});
-   //     map.addLayer(geoLayer);
-   // });
-
-   // console.log('bulidings', buildings);
-   // buildings.addTo(map);
-//
-   // var topoLayer = new L.TopoJSON();
-   //
-   // $.getJSON('../resources/sthlm_topo.json')
-   //    .done(addTopoData);
-   //
-   // var addTopoData = function(topoData){
-   //    topoLayer.addData(topoData);
-   //    topoLayer.addTo(map);
-   // }
-
-   // initialise project
    init();
 
 })();

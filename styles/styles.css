@@ -42,21 +42,21 @@ p {
 #winter {
    margin-left: auto;
    background: #fff;
-   color: #006101;
+   color: #005293;
 }
 
 #winter:hover, #winter.active {
-   background: #006101;
+   background: #005293;
    color: #fff;
 }
 
 #summer {
    background: #fff;
-   color: #005293;
+   color: #006101;
 }
 
 #summer:hover, #summer.active {
-   background: #005293;
+   background: #006101;
    color: #fff;
 }
 

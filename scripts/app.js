@@ -4,21 +4,33 @@ var omni = require('leaflet-omnivore');
 
 L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
+L.TopoJSON = L.GeoJSON.extend({
+  addData: function(jsonData) {
+      if (jsonData.type === "Topology") {
+         for (key in jsonData.objects) {
+            geojson = topojson.feature(jsonData, jsonData.objects[key]);
+            L.GeoJSON.prototype.addData.call(this, geojson);
+         }
+      }
+      else {
+         L.GeoJSON.prototype.addData.call(this, jsonData);
+      }
+   }
+});
 
 (function() {
-
-   // map settings
    var mapCenter = [59.3308, 18.0673];
-   var startZoom = 12;
+   var startZoom = 13;
    var map;
 
-   // Tile layers
-   var baseMapLayerUrl = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}',
+
+   var baseMapLayerUrl = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
       baseMapLayerOptions = {
-         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-         subdomains: 'abcd',
-         ext: 'png'
-      };
+   	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+   	subdomains: 'abcd',
+   	maxZoom: 19
+   };
+
    var summerTileLayer,
       summerTileLayerUrl = 'http://localhost:3000/summer/{z}/{x}/{y}.{ext}',
       summerTileLayerOptions = {
@@ -72,7 +84,6 @@ L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
          }
       }
    }
-
 
    init();
 

@@ -4,6 +4,7 @@ from PIL import Image, ImageColor, ImageDraw
 import pdb
 from os import path
 
+<<<<<<< HEAD
 im = Image.open("shadow_map/rendered/sthlm_buildings.png")
 newIm = im.copy()
 rgbImg = newIm.convert("RGB")
@@ -17,4 +18,4 @@ for y in xrange(0, newIm.size[0]):
 
 draw = ImageDraw.ImageDraw(rgbImg)
 
-rgbImg.save('shadow_map/rendered/sthlm_buildingsRgb.png')
+newIm.save('resources/sthlm_buildings.png')

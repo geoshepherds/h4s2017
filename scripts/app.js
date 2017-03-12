@@ -20,7 +20,6 @@ L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
 
 
-
 var init = (function() {
    var mapCenter = [59.3308, 18.0673];
    var startZoom = 12;

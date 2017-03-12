@@ -1,4 +1,4 @@
-import mapnik from 'mapnik';
+// import mapnik from 'mapnik';
 import express from 'express';
 import path from 'path';
 import compression from 'compression';

@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node server.js --presets es2015",
-    "webpack": "webpack scripts/app.compiled.js scripts/app.bundle.js --watch"
+    "webpack": "webpack scripts/app.js scripts/app.bundle.js --watch"
   },
   "author": "Owain Stratton and Angelica Hart Lindh",
   "license": "MIT",
   "dependencies": {
     "compression": "^1.6.2",
+    "express": "^4.15.2",
     "leaflet": "^1.0.3",
     "sphericalmercator": "^1.0.5"
   },

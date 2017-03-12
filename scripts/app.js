@@ -4,19 +4,19 @@ var omni = require('leaflet-omnivore');
 
 L.Icon.Default.imagePath = '../node_modules/leaflet/dist/images/';
 
-// L.TopoJSON = L.GeoJSON.extend({
-//   addData: function(jsonData) {
-//       if (jsonData.type === "Topology") {
-//          for (key in jsonData.objects) {
-//             geojson = topojson.feature(jsonData, jsonData.objects[key]);
-//             L.GeoJSON.prototype.addData.call(this, geojson);
-//          }
-//       }
-//       else {
-//          L.GeoJSON.prototype.addData.call(this, jsonData);
-//       }
-//    }
-// });
+L.TopoJSON = L.GeoJSON.extend({
+  addData: function(jsonData) {
+      if (jsonData.type === "Topology") {
+         for (key in jsonData.objects) {
+            geojson = topojson.feature(jsonData, jsonData.objects[key]);
+            L.GeoJSON.prototype.addData.call(this, geojson);
+         }
+      }
+      else {
+         L.GeoJSON.prototype.addData.call(this, jsonData);
+      }
+   }
+});
 
 
 
@@ -39,8 +39,11 @@ var init = (function() {
       tms: true,
    }).addTo(map);
 
-   var buildings = omni.csv('/buildings');
-   buildings.addTo(map);
+   var buildings = 
+   // var buildings = omni.csv('http://localhost:3000/buildings');
+   // buildings.addTo(map);
+   // var buildings = omni.topojson('http://localhost:3000/buildings');
+   // buildings.addTo(map);
 
    // var topoLayer = new L.TopoJSON();
    //

@@ -4,4 +4,5 @@ venv/
 shadow_map/data/
 shadow_map/rendered/
 resources/
+scripts/app.bundle.js
 *.pyc

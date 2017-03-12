@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
+      <Title>2016-06-21_summer_epsg3857.tif</Title>
+      <Abstract></Abstract>
+      <SRS>EPSG:900913</SRS>
+      <BoundingBox minx="17.99292385090395" miny="59.29274892952138" maxx="18.14187720438989" maxy="59.36878103665751"/>
+      <Origin x="17.99292385090395" y="59.29274892952138"/>
+      <TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
+      <TileSets profile="mercator">
+        <TileSet href="11" units-per-pixel="76.43702827148438" order="11"/>
+        <TileSet href="12" units-per-pixel="38.21851413574219" order="12"/>
+        <TileSet href="13" units-per-pixel="19.10925706787109" order="13"/>
+        <TileSet href="14" units-per-pixel="9.55462853393555" order="14"/>
+        <TileSet href="15" units-per-pixel="4.77731426696777" order="15"/>
+      </TileSets>
+    </TileMap>
+    

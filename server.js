@@ -15,7 +15,8 @@ const app = express();
 app.use(compression());
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const MAP_FILE = path.join(__dirname, 'data/2016-12-21_winter_epsg3857/');
+const WINTER_FILE = path.join(__dirname, 'data/winter/');
+const SUMMER_FILE = path.join(__dirname, 'data/summer/');
 const ENTRY_FILE = path.join(__dirname, 'index.html');
 const PORT = isDevelopment ? 3000 : process.env.PORT;
 
@@ -28,21 +29,39 @@ app.use(function(req, res, next) {
 });
 
 
-tilelive.load(`file://${MAP_FILE}`, (err, source) => {
+tilelive.load(`file://${WINTER_FILE}`, (err, source) => {
    if (err) throw err;
 
    console.log(source);
-   app.get('/:z/:x/:y.png', (req, res) => {
-      console.log(req.params);
+   app.get('/winter/:z/:x/:y.png', (req, res) => {
       const { z, x, y } = req.params;
 
       console.log(`Fetching %d %d %d ${z} ${x} ${y}`);
       source.getTile(z, x, y, (err, tile, headers) => {
-         console.log(tile, headers);
          if (err) {
             res.status(404);
-            res.send(err.message);
-            console.log(err.message);
+            // res.send(err.message);
+         } else {
+            res.status(200);
+            res.set(headers);
+            res.send(tile);
+         }
+      });
+   });
+});
+
+tilelive.load(`file://${SUMMER_FILE}`, (err, source) => {
+   if (err) throw err;
+
+   // console.log(source);
+   app.get('/summer/:z/:x/:y.png', (req, res) => {
+      const { z, x, y } = req.params;
+
+      console.log(`Fetching %d %d %d ${z} ${x} ${y}`);
+      source.getTile(z, x, y, (err, tile, headers) => {
+         if (err) {
+            res.status(404);
+            // res.send(err.message);
          } else {
             res.status(200);
             res.set(headers);

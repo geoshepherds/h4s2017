@@ -1,3 +1,13 @@
+## LuminoCity 
+### Mapping shadows cast by buildings over the course of a day 
+
+#### Stockholm in winter
+![Svenska Eko-Kartan image](https://drive.google.com/uc?export=view&id=0B0m29fs8GfgrQ1pES2Z4MlQwMzA)
+
+#### Stockholm in summer
+![Svenska Eko-Kartan image](https://drive.google.com/uc?export=view&id=0B0m29fs8GfgrLXNzZUFnT2xHVTA)
+
+
 ## Installing
 
 You need Python installed.

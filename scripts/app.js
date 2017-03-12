@@ -18,41 +18,73 @@ L.TopoJSON = L.GeoJSON.extend({
    }
 });
 
+(function() {
 
-
-var init = (function() {
    var mapCenter = [59.3308, 18.0673];
    var startZoom = 12;
+   var map;
 
-   var map = new L.Map('map').setView(mapCenter, startZoom);
+   // Tile layers
+   var baseMapLayerUrl = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}',
+      baseMapLayerOptions = {
+         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+         subdomains: 'abcd',
+         ext: 'png'
+      };
+   var summerTileLayer,
+      summerTileLayerUrl = 'http://localhost:3000/summer/{z}/{x}/{y}.{ext}',
+      summerTileLayerOptions = {
+         minZoom: 11,
+         maxZoom: 15,
+         ext: 'png',
+         tms: true,
+      };
 
-   var baseTileLayer = new L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-   	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-   	subdomains: 'abcd',
-   	ext: 'png'
-   }).addTo(map);
+   var winterTileLayer,
+      winterTileLayerUrl = 'http://localhost:3000/winter/{z}/{x}/{y}.{ext}',
+      winterTileLayerOptions = {
+         minZoom: 11,
+         maxZoom: 15,
+         ext: 'png',
+         tms: true,
+      };
 
-   var summerTileLayer = new L.tileLayer('http://localhost:3000/{z}/{x}/{y}.{ext}', {
-      minZoom: 11,
-      maxZoom: 15,
-      ext: 'png',
-      tms: true,
-   }).addTo(map);
+   function init() {
 
-   var buildings = 
-   // var buildings = omni.csv('http://localhost:3000/buildings');
-   // buildings.addTo(map);
-   // var buildings = omni.topojson('http://localhost:3000/buildings');
-   // buildings.addTo(map);
+      // create map with settings
+      map = new L.Map('map').setView(mapCenter, startZoom);
 
-   // var topoLayer = new L.TopoJSON();
-   //
-   // $.getJSON('../resources/sthlm_topo.json')
-   //    .done(addTopoData);
-   //
-   // var addTopoData = function(topoData){
-   //    topoLayer.addData(topoData);
-   //    topoLayer.addTo(map);
-   // }
+      // loade Tile layers
+      var baseMapLayer = new L.tileLayer(baseMapLayerUrl, baseMapLayerOptions)
+         .setZIndex(100)
+         .addTo(map);
+
+      summerTileLayer = new L.tileLayer(summerTileLayerUrl, summerTileLayerOptions).setZIndex(200);
+      winterTileLayer = new L.tileLayer(winterTileLayerUrl, winterTileLayerOptions).setZIndex(300).addTo(map);
+
+      $('.button').on('click', function() {
+         changeTileLayer($(this).attr('id'));
+         $('.button').toggleClass('active', false);
+         $(this).toggleClass('active', true);
+      });
+   }
+
+   function changeTileLayer(season) {
+      var activeLayer = $('#topBanner').find('.button.active').attr('id');
+
+      if (season === activeLayer) {
+         return;
+      } else {
+         if (season === 'summer') {
+            map.removeLayer(winterTileLayer);
+            map.addLayer(summerTileLayer);
+         } else if (season === 'winter') {
+            map.removeLayer(summerTileLayer);
+            map.addLayer(winterTileLayer);
+         }
+      }
+   }
+
+   init();
 
 })();

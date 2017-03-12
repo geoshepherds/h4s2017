@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node server.js --presets es2015",
+    "start": "nodemon server.js --exec babel-node --presets es2015",
     "webpack": "webpack scripts/app.js scripts/app.bundle.js --watch",
     "topo": "topojson -p -o resources/countries.topojson -- resources/sthlm.geojson"
   },
@@ -14,9 +14,14 @@
   "dependencies": {
     "compression": "^1.6.2",
     "express": "^4.15.2",
+    "express-csv": "^0.6.0",
+    "fast-csv": "^2.4.0",
     "jquery": "^3.1.1",
     "leaflet": "^1.0.3",
-    "sphericalmercator": "^1.0.5"
+    "leaflet-omnivore": "^0.3.4",
+    "sphericalmercator": "^1.0.5",
+    "tilelive": "^5.12.3",
+    "tilelive-file": "0.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

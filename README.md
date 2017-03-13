@@ -14,6 +14,31 @@ Med hjälp av öppen data från Stockholms Stad har vi utvecklat en karta som vi
 
 ## Installing
 
+The client side runs on [Node.js](https://nodejs.org/en/) to serve the map tiles of the shadows generated from the processing steps below. 
+
+```sh
+brew install node
+```
+
+```sh
+cd h4s2017
+```
+
+#### Build bundle files
+
+```sh
+npm install -g webpack
+npm run webpack
+```
+
+#### Start development server
+
+```sh
+npm start
+```
+
+### Data Processing
+
 You need Python installed.
 
 ```sh

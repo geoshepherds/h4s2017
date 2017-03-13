@@ -72,17 +72,17 @@ tilelive.load(`file://${SUMMER_FILE}`, (err, source) => {
    });
 });
 
-const sthlmBuildings = fs.readFileSync(path.join(BUILDINGS_FILE, 'sthlm.csv'), 'utf8');
-console.log(sthlmBuildings);
-
-app.get('/buildings', (req, res) => {
-   csvtogeojson(sthlmBuildings, (err, data) => {
-      if (err) throw err;
-
-      console.log(data);
-
-   })
-});
+// const sthlmBuildings = fs.readFileSync(path.join(BUILDINGS_FILE, 'sthlm.csv'), 'utf8');
+// console.log(sthlmBuildings);
+//
+// app.get('/buildings', (req, res) => {
+//    csvtogeojson(sthlmBuildings, (err, data) => {
+//       if (err) throw err;
+//
+//       console.log(data);
+//
+//    })
+// });
 
 // const sthlmBuildings = csvStream.fromPath(path.join(BUILDINGS_FILE, 'sthlm.csv'))
 //    .on('data', (data) => {})
